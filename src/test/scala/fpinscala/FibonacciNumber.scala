@@ -3,21 +3,16 @@ package fpinscala
 object FibonacciNumber {
   // exercise 2.1
   def fib(n: Int): Int = {
-    if (n <= 0) {
-      0
-    } else if (n == 1) {
-      1
-    } else {
-      @annotation.tailrec
-      def go(curIndex: Int, prev: Int, preprev: Int): Int = {
-        val cur = prev + preprev
-        if (curIndex == n) {
-          prev + preprev
-        } else {
-          go(curIndex + 1, cur, prev)
-        }
+    @annotation.tailrec
+    def go(n: Int, prev: Int, cur: Int): Int = {
+      if (n <= 0) {
+        prev
+      } else {
+        go(n - 1, cur, prev + cur)
       }
-      go(2, 1, 0)
     }
+
+    go(n, 0, 1)
+
   }
 }
