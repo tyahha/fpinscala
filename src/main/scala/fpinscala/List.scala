@@ -43,8 +43,8 @@ object List {
 
   // exercise 3.5
   @annotation.tailrec
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
-    case Cons(a, l) if f(a) => dropWhile(l, f)
+  def dropWhile[A](l: List[A])(f: A => Boolean): List[A] = l match {
+    case Cons(a, l) if f(a) => dropWhile(l)(f)
     case _ => l
   }
 
