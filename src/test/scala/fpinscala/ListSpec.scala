@@ -70,4 +70,11 @@ class ListSpec extends FreeSpec {
     assert(List.dropWhile(List[Int](), (n: Int) => n > 100) == Nil)
     assert(List.dropWhile(List(1,2,3,4,5), (n: Int) => n <= 3) == List(4,5))
   }
+
+  "init" in {
+    assert(List.init(Nil) == Nil)
+    assert(List.init(List(1)) == Nil)
+    assert(List.init(List(1, 2)) == List(1))
+    assert(List.init(List(1, 2, 3)) == List(1, 2))
+  }
 }

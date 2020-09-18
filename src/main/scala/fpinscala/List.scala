@@ -47,4 +47,17 @@ object List {
     case Cons(a, l) if f(a) => dropWhile(l, f)
     case _ => l
   }
+
+  def append[A](a1: List[A], a2: List[A]): List[A] =
+    a1 match {
+      case Nil => a2
+      case Cons(h, t) => Cons(h, append(t, a2))
+    }
+
+  // exercise 3.6
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(_, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
+  }
 }
