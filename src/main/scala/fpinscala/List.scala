@@ -16,6 +16,27 @@ object List {
     case Cons(x, xs) => x * product(xs)
   }
 
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
+
+  @annotation.tailrec
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+    }
+
+  def sum2(ints: List[Int]): Int = foldRight(ints, 0)(_ + _)
+  def product2(ds: List[Double]): Double = foldRight(ds, 1.0)(_ * _)
+
+  // exercise 3.11
+  def sum3(ints: List[Int]): Int = foldLeft(ints, 0)(_ + _)
+  def product3(ds: List[Double]): Double = foldLeft(ds, 1.0)(_ * _)
+  def length(as: List[_]): Int = foldLeft(as, 0)((len, _) => len + 1)
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
@@ -60,4 +81,8 @@ object List {
     case Cons(_, Nil) => Nil
     case Cons(h, t) => Cons(h, init(t))
   }
+
+  // exercise 3.12
+  def reverse[A](l: List[A]): List[A] = foldLeft(l, Nil: List[A])((as, a) => Cons(a, as))
+
 }

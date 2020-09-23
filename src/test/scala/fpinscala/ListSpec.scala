@@ -14,6 +14,26 @@ class ListSpec extends FreeSpec {
         assert(List.product(List(1,2,3)) == 6)
       }
     }
+    "sum2" - {
+      "1,2,3" in {
+        assert(List.sum2(List(1,2,3)) == 6)
+      }
+    }
+    "product2" - {
+      "1,2,3" in {
+        assert(List.product2(List(1,2,3)) == 6)
+      }
+    }
+    "sum3" - {
+      "1,2,3" in {
+        assert(List.sum3(List(1,2,3)) == 6)
+      }
+    }
+    "product3" - {
+      "1,2,3" in {
+        assert(List.product3(List(1,2,3)) == 6)
+      }
+    }
   }
 
   // exercise 3.1
@@ -76,5 +96,24 @@ class ListSpec extends FreeSpec {
     assert(List.init(List(1)) == Nil)
     assert(List.init(List(1, 2)) == List(1))
     assert(List.init(List(1, 2, 3)) == List(1, 2))
+  }
+
+  // exercise 3.8
+  "foldRight from list to list" in {
+    val got = List.foldRight(List(1,2,3), Nil: List[Int])(Cons(_, _))
+    assert(got == List(1,2,3))
+  }
+
+  "length" in {
+    assert(List.length(Nil) == 0)
+    assert(List.length(List(1)) == 1)
+    assert(List.length(List(1, 2)) == 2)
+  }
+
+  "reverse" in {
+    assert(List.reverse(Nil) == Nil)
+    assert(List.reverse(List(1)) == List(1))
+    assert(List.reverse(List(1,2)) == List(2,1))
+    assert(List.reverse(List(1,2,3)) == List(3,2,1))
   }
 }
