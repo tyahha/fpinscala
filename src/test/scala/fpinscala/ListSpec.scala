@@ -116,4 +116,13 @@ class ListSpec extends FreeSpec {
     assert(List.reverse(List(1,2)) == List(2,1))
     assert(List.reverse(List(1,2,3)) == List(3,2,1))
   }
+
+  "append2" in {
+    assert(List.append(Nil, Nil) == Nil)
+    assert(List.append(Nil, List(1)) == List(1))
+    assert(List.append(List(1), Nil) == List(1))
+    assert(List.append(List(1), List(1)) == List(1, 1))
+    assert(List.append(List(1,2), List(1)) == List(1, 2, 1))
+    assert(List.append(List(1,2), List(1,2)) == List(1, 2, 1, 2))
+  }
 }
