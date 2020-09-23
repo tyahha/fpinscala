@@ -93,4 +93,7 @@ object List {
 
   // exercise 3.14
   def append2[A](as: List[A], bs: List[A]): List[A] = foldRight(as, bs)(Cons(_, _))
+
+  // exercise 3.15
+  def flatten[A](ll: List[List[A]]): List[A] = foldRight(ll, Nil: List[A])(append)
 }

@@ -125,4 +125,8 @@ class ListSpec extends FreeSpec {
     assert(List.append(List(1,2), List(1)) == List(1, 2, 1))
     assert(List.append(List(1,2), List(1,2)) == List(1, 2, 1, 2))
   }
+
+  "flatten" in {
+    assert(List.flatten(List(List(1,2), List(3,4))) == List(1,2,3,4))
+  }
 }
