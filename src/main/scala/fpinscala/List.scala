@@ -96,4 +96,40 @@ object List {
 
   // exercise 3.15
   def flatten[A](ll: List[List[A]]): List[A] = foldRight(ll, Nil: List[A])(append)
+
+  // exercise 3.16
+  def add1(l: List[Int]): List[Int] = foldRight(l, Nil: List[Int])((a, b) => Cons(a + 1, b))
+
+  // exercise 3.17
+  def doublesToString(l: List[Double]): List[String] =
+    foldRight(l, Nil: List[String])((a, b) => Cons(a.toString, b))
+
+  // exercise 3.18
+  def map[A,B](as: List[A])(f: A => B): List[B] = foldRight(as, Nil: List[B])((a, b) => Cons(f(a), b))
+
+  // exercise 3.19
+  def filter[A](as: List[A])(f: A => Boolean): List[A] =
+    foldRight(as, Nil: List[A])((a, l) => if (f(a)) Cons(a, l) else l)
+
+  // exercise 3.20
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =
+    flatten(map(as)(f))
+
+  // exercise 3.21
+  def filter2[A](as: List[A])(f: A => Boolean): List[A] =
+    flatMap(as)(a => if (f(a)) Cons(a, Nil) else Nil)
+
+  // exercise 3.22
+  def addEach(as: List[Int], bs: List[Int]): List[Int] = (as, bs) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(a, aa), Cons(b, bb)) => Cons(a + b, addEach(aa, bb))
+  }
+
+  // exercise 3.23
+  def zipWith[A,B,C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(a, aa), Cons(b, bb)) => Cons(f(a,b), zipWith(aa, bb)(f))
+  }
 }

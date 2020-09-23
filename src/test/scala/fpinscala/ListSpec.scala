@@ -129,4 +129,19 @@ class ListSpec extends FreeSpec {
   "flatten" in {
     assert(List.flatten(List(List(1,2), List(3,4))) == List(1,2,3,4))
   }
+
+  "add1" in {
+    assert(List.add1(List(1,2,3)) == List(2,3,4))
+  }
+
+  "doublesToString" in {
+    assert(List.doublesToString(List(1.0,2.0,3.0)) == List("1.0","2.0","3.0"))
+  }
+
+  "filter" in {
+    assert(List.filter(List(1,2,3,4,5,6))(_ % 2 == 0) == List(2,4,6))
+  }
+  "filter2" in {
+    assert(List.filter2(List(1,2,3,4,5,6))(_ % 2 == 0) == List(2,4,6))
+  }
 }
