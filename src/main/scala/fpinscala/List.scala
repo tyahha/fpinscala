@@ -132,4 +132,25 @@ object List {
     case (_, Nil) => Nil
     case (Cons(a, aa), Cons(b, bb)) => Cons(f(a,b), zipWith(aa, bb)(f))
   }
+
+  // exercise 3.34
+  @annotation.tailrec
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+    @annotation.tailrec
+    def check(sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
+      case (_, Nil) => true
+      case (Nil, _) => false
+      case (Cons(h1, t1), Cons(h2, t2)) =>
+        if (h1 == h2) check(t1, t2)
+        else false
+    }
+
+    if (check(sup, sub)) {
+      true
+    } else {
+      val tail = List.tail(sup)
+      if (tail == Nil) false
+      else hasSubsequence(tail, sub)
+    }
+  }
 }
