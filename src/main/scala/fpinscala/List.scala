@@ -135,22 +135,15 @@ object List {
 
   // exercise 3.34
   @annotation.tailrec
-  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
-    @annotation.tailrec
-    def check(sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
-      case (_, Nil) => true
-      case (Nil, _) => false
-      case (Cons(h1, t1), Cons(h2, t2)) =>
-        if (h1 == h2) check(t1, t2)
-        else false
-    }
-
-    if (check(sup, sub)) {
-      true
-    } else {
-      val tail = List.tail(sup)
-      if (tail == Nil) false
-      else hasSubsequence(tail, sub)
-    }
+  def startWith[A](sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
+    case (_, Nil) => true
+    case (Cons(h1, t1), Cons(h2, t2)) if h1 == h2 =>startWith(t1, t2)
+    case _ => false
+  }
+  @annotation.tailrec
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = sup match {
+    case Nil => sub == Nil
+    case _ if startWith(sup, sub) => true
+    case Cons(_, t) => hasSubsequence(t, sub)
   }
 }
